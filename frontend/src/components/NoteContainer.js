@@ -151,21 +151,24 @@ class NoteContainer extends Component {
         }))
     }
 
-    forPatchingNote = event => {
+    forPatchingNote = id => {
       // event.preventDefault()
       let urlforNote = notesURL + this.state.selectedNote.id;
       let revisedNote = {
+        body: this.state.body,
         title: this.state.title,
-        body: this.state.body
+        user: {
+          id: 2,
+          name: 'ruthnewman'
+        }
       }
       this.patchNote(urlforNote, revisedNote)
-          .then(revisedNote => this.setState({
-        selectedNote: revisedNote
-      }))
+      const notes = this.props.notes.map(note =>
+            note.id === id
+            ? {...note, body: this.state.body, title: this.state.title}
+            : note)
+          this.setState({ notes })
     }
-
-
-
   }
 
 export default NoteContainer;
