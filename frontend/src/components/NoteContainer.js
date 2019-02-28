@@ -7,10 +7,20 @@ class NoteContainer extends Component {
   render() {
     return (
       <Fragment>
-        <Search />
+        <Search handleSearchInput={this.props.handleSearchInput}/>
         <div className='container'>
-          <Sidebar />
-          <Content />
+          <Sidebar notes={this.props.notes} 
+          handleNoteListSelect={this.props.handleNoteListSelect}
+          newNoteFetch={this.props.newNoteFetch}
+          />
+
+
+          <Content viewNote={this.props.viewNote} 
+          editNote={this.props.editNote}
+          handleEditRender={this.props.handleEditRender}
+          reRenderNoteView={this.props.reRenderNoteView}
+          patchNoteEdit={this.props.patchNoteEdit}
+          />
         </div>
       </Fragment>
     );
