@@ -12,10 +12,20 @@ import Instructions from './Instructions';
 */
 class Content extends Component {
   renderContent = () => {
-    if (false) {
-      return <NoteEditor />;
-    } else if (false) {
-      return <NoteViewer />;
+    if (this.props.noteToEdit !== null) {
+      return <NoteEditor
+        selectedNote={this.props.selectedNote}
+        handleChange={this.props.handleChange}
+        cancelEditingNote={this.props.cancelEditingNote}
+        forPatchingNote={this.props.forPatchingNote}
+      />;
+    } else if (this.props.selectedNote !== null) {
+      return <NoteViewer
+      selectedNote={this.props.selectedNote}
+      noteToEdit={this.props.noteToEdit}
+      editNote={this.props.editNote}
+
+      />;
     } else {
       return <Instructions />;
     }
@@ -28,6 +38,7 @@ class Content extends Component {
       </div>
     );
   }
+
 }
 
 export default Content;

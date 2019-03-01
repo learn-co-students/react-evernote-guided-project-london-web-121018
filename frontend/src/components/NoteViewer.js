@@ -3,9 +3,9 @@ import React, { Fragment } from 'react';
 const NoteViewer = (props) => {
   return (
     <Fragment>
-      <h2>Title</h2>
-      <p>Body</p>
-      <button>Edit</button>
+      <h2>{props.selectedNote.title}</h2>
+      <p>{props.selectedNote.body}</p>
+      <button onClick={() => props.editNote(props.selectedNote)}>Edit</button>
     </Fragment>
   );
 }

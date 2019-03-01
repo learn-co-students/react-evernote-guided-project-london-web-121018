@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import NoteItem from './NoteItem';
 
-const NoteList = (props) => {
-  return (
-    <ul>
-      {/* Render list of notes here... */}
-      <NoteItem />
-    </ul>
-  );
+class NoteList extends Component {
+
+  render() {
+    return (
+      <ul>
+        {
+          this.props.notes.map(note => <NoteItem
+            note={note}
+            key={note.id}
+            handleClick={this.props.handleClick}
+            selectedNote={this.props.selectedNote}
+            />)
+        }
+      </ul>
+    );
+  }
+
 }
 
 export default NoteList;
