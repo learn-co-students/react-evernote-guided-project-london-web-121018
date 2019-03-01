@@ -65,6 +65,7 @@ class NoteContainer extends Component {
   handleClick = (selectedNote) => {
     this.setState({
       selectedNote: selectedNote,
+      noteToEdit: null,
     })
   }
 
@@ -151,23 +152,27 @@ class NoteContainer extends Component {
         }))
     }
 
-    forPatchingNote = id => {
-      // event.preventDefault()
+    forPatchingNote = (event, noteInfo) => {
+      event.preventDefault()
       let urlforNote = notesURL + this.state.selectedNote.id;
       let revisedNote = {
-        body: this.state.body,
-        title: this.state.title,
+        ...noteInfo,
         user: {
           id: 2,
           name: 'ruthnewman'
         }
       }
       this.patchNote(urlforNote, revisedNote)
-      const notes = this.props.notes.map(note =>
-            note.id === id
-            ? {...note, body: this.state.body, title: this.state.title}
-            : note)
+        .then( updatedNote => {
+          const notes = this.state.notes.map(note =>
+            note.id === updatedNote.id
+            ? {...updatedNote}
+            : note
+          )
           this.setState({ notes })
+          this.setState({selectedNote: updatedNote })
+          this.setState({noteToEdit: null})
+        })
     }
   }
 

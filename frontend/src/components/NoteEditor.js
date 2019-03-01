@@ -37,7 +37,7 @@ class NoteEditor extends Component {
           className="button"
           type="submit"
           value="Save"
-          onClick={this.props.forPatchingNote}
+          onClick={e => this.props.forPatchingNote(e, this.state)}
           />
           <button
           type="button"
