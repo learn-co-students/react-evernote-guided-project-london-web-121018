@@ -11,6 +11,7 @@ class App extends Component {
       notes: [],
       selectedNote: null,
       showEdit: false,
+      noteFilter: '',
     };
   }
 
@@ -38,6 +39,16 @@ class App extends Component {
     })
   }
 
+  handleSearch = (value) => {
+      this.setState({
+        noteFilter: value
+      })
+    }
+
+  filteredNotes = () => {
+    return this.state.notes.filter( note => note.title.includes(this.state.noteFilter) )
+  }
+
   handleSaveClick = (selectedNote, e) => {
     e.preventDefault();
 
@@ -51,7 +62,7 @@ class App extends Component {
         this.setState({ notes: updatedNotes })
       })
   }
-  //
+
   createNote = () => {
     let defaultNewNote = {
       body: 'placeholder',
@@ -77,13 +88,12 @@ class App extends Component {
     }).then(response => response.json())
   }
 
-
   render() {
     return (
       <div className="app">
         <Header />
         <NoteContainer
-        theThingWeArePassing={this.state.notes}
+        theThingWeArePassing={this.filteredNotes()}
         handleNoteClickForContent={this.handleNoteClickForContent}
         selectedNotePassingToContainer={this.state.selectedNote}
         handleEditClick={this.handleEditClick}
@@ -92,6 +102,7 @@ class App extends Component {
         updateInputValue={this.updateInputValue}
         handleCancelClick={this.handleCancelClick}
         createNote={this.createNote}
+        handleSearch={this.handleSearch}
         />
       </div>
     );
