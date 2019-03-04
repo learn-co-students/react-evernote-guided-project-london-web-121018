@@ -17,6 +17,7 @@ class Content extends Component {
       return <NoteEditor
       note={this.props.selectedNotePassingToContent}
       handleSaveClick={this.props.handleSaveClick}
+      handleCancelClick={this.props.handleCancelClick}
       />;
     } else if (this.props.selectedNotePassingToContent) {
       return <NoteViewer

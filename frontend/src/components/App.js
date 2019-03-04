@@ -21,11 +21,21 @@ class App extends Component {
   }
 
   handleNoteClickForContent = (note) => {
-    this.setState({selectedNote: note})
+    this.setState({
+      selectedNote: note
+    })
   }
 
   handleEditClick = (note) => {
-    this.setState({showEdit: note})
+    this.setState({
+      showEdit: true
+    })
+  }
+
+  handleCancelClick = () => {
+    this.setState({
+      showEdit: false
+    })
   }
 
   handleSaveClick = (selectedNote, e) => {
@@ -36,9 +46,26 @@ class App extends Component {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(selectedNote)
     }).then( resp => resp.json())
+      .then( note => {
+        const updatedNotes = this.state.notes.map( n => n.id == note.id ? note : n)
+        this.setState({ notes: updatedNotes })
+      })
   }
-    // and then you ought setState with the notes that come back after the patch,
-    // that in turn updates App's state, and everything is re-rendered
+
+  createNote = () => {
+    let defaultNewNote = {
+      body: 'placeholder',
+      title: 'default',
+      user: {
+        id: 2,
+        name: 'ruthnewman'
+      }
+    }
+    this.postNewNote(notesURL, defaultNewNote)
+      .then( newNote => this.setState({
+        notes: [...this.state.notes, newNote]
+      }))
+  }
 
 
   render() {
@@ -53,6 +80,8 @@ class App extends Component {
         showEdit={this.state.showEdit}
         handleSaveClick={this.handleSaveClick}
         updateInputValue={this.updateInputValue}
+        handleCancelClick={this.handleCancelClick}
+        createNote={this.createNote}
         />
       </div>
     );

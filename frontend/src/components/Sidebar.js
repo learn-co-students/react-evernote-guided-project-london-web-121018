@@ -10,7 +10,10 @@ class Sidebar extends Component {
         thingToPassToNoteList={this.props.notesToPassToSidebarItem}
         handleNoteClickForContent={this.props.handleNoteClickForContent}
         />
-        <button>New</button>
+        <button
+        onClick={(e) => this.props.handleNewNoteClick(this.state, e)}>
+        New
+        </button>
       </div>
     );
   }

@@ -41,7 +41,10 @@ class NoteEditor extends Component {
         value="Save"
         />
 
-        <button type="button">
+        <button
+        type="button"
+        onClick={this.props.createNote}
+        >
           Cancel
         </button>
         </div>

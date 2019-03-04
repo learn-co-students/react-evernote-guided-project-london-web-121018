@@ -12,12 +12,14 @@ class NoteContainer extends Component {
           <Sidebar
           notesToPassToSidebarItem={this.props.theThingWeArePassing}
           handleNoteClickForContent={this.props.handleNoteClickForContent}
+          createNote={this.props.createNote}
           />
           <Content
           selectedNotePassingToContent={this.props.selectedNotePassingToContainer}
           handleEditClick={this.props.handleEditClick}
           showEdit={this.props.showEdit}
           handleSaveClick={this.props.handleSaveClick}
+          handleCancelClick={this.props.handleCancelClick}
           />
         </div>
       </Fragment>
