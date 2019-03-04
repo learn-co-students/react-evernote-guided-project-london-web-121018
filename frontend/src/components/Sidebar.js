@@ -11,7 +11,7 @@ class Sidebar extends Component {
         handleNoteClickForContent={this.props.handleNoteClickForContent}
         />
         <button
-        onClick={(e) => this.props.handleNewNoteClick(this.state, e)}>
+        onClick={(e) => this.props.createNote(this.state, e)}>
         New
         </button>
       </div>

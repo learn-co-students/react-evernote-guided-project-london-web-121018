@@ -51,20 +51,30 @@ class App extends Component {
         this.setState({ notes: updatedNotes })
       })
   }
-
+  //
   createNote = () => {
     let defaultNewNote = {
       body: 'placeholder',
       title: 'default',
       user: {
-        id: 2,
-        name: 'ruthnewman'
+        id: 1,
+        name: 'Andy'
       }
     }
-    this.postNewNote(notesURL, defaultNewNote)
+    this.postNewNote(API, defaultNewNote)
       .then( newNote => this.setState({
         notes: [...this.state.notes, newNote]
       }))
+  }
+
+  postNewNote = (API, data) => {
+    return fetch(API, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+      body: JSON.stringify(data)
+    }).then(response => response.json())
   }
 
 
