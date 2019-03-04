@@ -9,8 +9,16 @@ class NoteContainer extends Component {
       <Fragment>
         <Search />
         <div className='container'>
-          <Sidebar />
-          <Content />
+          <Sidebar
+          notesToPassToSidebarItem={this.props.theThingWeArePassing}
+          handleNoteClickForContent={this.props.handleNoteClickForContent}
+          />
+          <Content
+          selectedNotePassingToContent={this.props.selectedNotePassingToContainer}
+          handleEditClick={this.props.handleEditClick}
+          showEdit={this.props.showEdit}
+          handleSaveClick={this.props.handleSaveClick}
+          />
         </div>
       </Fragment>
     );
