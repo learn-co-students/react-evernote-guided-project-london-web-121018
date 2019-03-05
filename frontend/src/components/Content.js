@@ -15,7 +15,8 @@ class Content extends Component {
     if (this.props.state.edit) {
       return <NoteEditor
         note={this.props.state.selectedNote}
-        editView={this.props.editView} />;
+        editView={this.props.editView}
+        saveNote={this.props.saveNote} />;
     } else if (this.props.state.selectedNote) {
       return <NoteViewer
         note={this.props.state.selectedNote}

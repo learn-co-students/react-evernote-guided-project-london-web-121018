@@ -39,6 +39,16 @@ class NoteContainer extends Component {
     this.setState({ edit: !this.state.edit })
   }
 
+  //Save edited note 
+  saveNote = (e, note) => {
+    e.preventDefault()
+    fetch(`${URL}/${note.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(note)
+    })
+  }
+
 
   render() {
     return (
@@ -50,7 +60,8 @@ class NoteContainer extends Component {
             selectNote={this.selectNote} />
           <Content
             state={this.state}
-            editView={this.editView} />
+            editView={this.editView}
+            saveNote={this.saveNote} />
         </div>
       </Fragment>
     );

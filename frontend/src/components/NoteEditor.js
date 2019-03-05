@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+URL = 'http://localhost:3001/api/v1/notes'
 class NoteEditor extends Component {
   constructor(props) {
     super(props)
@@ -14,9 +15,21 @@ class NoteEditor extends Component {
       [e.target.name]: e.target.value,
     })
   }
+
+  //Save edited note 
+  saveNote = (e, note) => {
+    e.preventDefault()
+    note.title = this.state.title
+    note.body = this.state.body
+    fetch(`${URL}/${note.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(this.state)
+    }).then(() => this.props.editView())
+  }
   render() {
     return (
-      <form className="note-editor">
+      <form onSubmit={e => this.saveNote(e, this.props.note)} className="note-editor">
         <input
           type="text"
           name="title"
