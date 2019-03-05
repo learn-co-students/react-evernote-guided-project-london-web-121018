@@ -1,10 +1,21 @@
 import React from 'react';
 
-const NoteList = (props) => (
-  <li>
-    <h2>Title</h2>
-    <p>Caption...</p>
-  </li>
-);
+const NoteItem = (props) => {
 
-export default NoteList;
+  let truncatedBody = note => {
+    let splitBody = note.body.split(" ")
+    let truncatedBody = `${splitBody[0]} ${splitBody[1]}...`
+    return truncatedBody
+  }
+
+  return (
+
+    <li
+      onClick={() => props.selectNote(props.note)}>
+      <h2>{props.note.title}</h2>
+      <p>{truncatedBody(props.note)}</p>
+    </li>
+  )
+};
+
+export default NoteItem;
