@@ -12,8 +12,10 @@ import Instructions from './Instructions';
 */
 class Content extends Component {
   renderContent = () => {
-    if (this.props.state.view === 'edit') {
-      return <NoteEditor />;
+    if (this.props.state.edit) {
+      return <NoteEditor
+        note={this.props.state.selectedNote}
+        editView={this.props.editView} />;
     } else if (this.props.state.selectedNote) {
       return <NoteViewer
         note={this.props.state.selectedNote}

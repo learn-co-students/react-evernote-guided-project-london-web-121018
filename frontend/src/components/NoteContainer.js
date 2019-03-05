@@ -15,7 +15,7 @@ class NoteContainer extends Component {
     this.state = {
       notes: [],
       selectedNote: null,
-      view: 'standard'
+      edit: false
     }
   }
 
@@ -30,13 +30,13 @@ class NoteContainer extends Component {
   selectNote = note => {
     this.setState({
       selectedNote: note,
-      view: 'standard'
+      edit: false,
     })
   }
 
   //Switch to edit view 
   editView = () => {
-    this.setState({ view: 'edit' })
+    this.setState({ edit: !this.state.edit })
   }
 
 
