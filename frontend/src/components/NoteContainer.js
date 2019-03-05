@@ -39,15 +39,21 @@ class NoteContainer extends Component {
     this.setState({ edit: !this.state.edit })
   }
 
-  //Save edited note 
-  saveNote = (e, note) => {
-    e.preventDefault()
-    fetch(`${URL}/${note.id}`, {
-      method: 'PATCH',
+  //Creating new note 
+  createNewNote = () => {
+    let newNote = {
+      user_id: 1,
+      title: "Your note title",
+      body: "Your stuff here"
+    }
+    fetch(URL, {
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(note)
-    })
+      body: JSON.stringify(newNote)
+    }).then(() => this.renderNotes())
   }
+
+
 
 
   render() {
@@ -57,7 +63,8 @@ class NoteContainer extends Component {
         <div className='container'>
           <Sidebar
             notes={this.state.notes}
-            selectNote={this.selectNote} />
+            selectNote={this.selectNote}
+            newNote={this.createNewNote} />
           <Content
             state={this.state}
             editView={this.editView}

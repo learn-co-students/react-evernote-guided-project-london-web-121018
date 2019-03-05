@@ -9,7 +9,7 @@ class NoteEditor extends Component {
       body: props.note.body,
     }
   }
-
+  //Make body and title editable in state
   editNoteAttribute = e => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -27,6 +27,7 @@ class NoteEditor extends Component {
       body: JSON.stringify(this.state)
     }).then(() => this.props.editView())
   }
+
   render() {
     return (
       <form onSubmit={e => this.saveNote(e, this.props.note)} className="note-editor">
